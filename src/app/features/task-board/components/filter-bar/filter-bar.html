@@ -1,0 +1,10 @@
+ <mat-chip-listbox class="filter-bar" aria-label="Filter tasks">
+      @for (option of options; track option) {
+        <mat-chip-option
+          [selected]="current === option"
+          (click)="select(option)">
+          <mat-icon matChipAvatar>{{ icons[option] }}</mat-icon>
+          {{ labels[option] }}
+        </mat-chip-option>
+      }
+    </mat-chip-listbox>

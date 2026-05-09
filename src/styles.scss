@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// Define a custom Jira-inspired palette
+$primary: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$blue-palette,
+    tertiary: mat.$violet-palette,
+  ),
+  typography: (
+    brand-family: 'Inter, sans-serif',
+    plain-family: 'Inter, sans-serif',
+  ),
+  density: (scale: 0)
+));
+
+html {
+  @include mat.all-component-themes($primary);
+  @include mat.typography-hierarchy($primary);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f4f5f7;  // Jira's off-white background
+  color: #172b4d;
+}
+
+// Utility
+.spacer { flex: 1 1 auto; }

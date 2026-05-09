@@ -1,0 +1,57 @@
+ .board-header {
+      margin-bottom: 24px;
+    }
+
+    .board-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #172b4d;
+      margin: 0 0 16px;
+
+      mat-icon { color: #1976d2; }
+    }
+
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .column-card {
+      border-radius: 10px !important;
+      padding: 0 !important;
+      background: #ffffff !important;
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px 10px;
+      border-top: 3px solid transparent;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .column-title {
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #172b4d;
+      flex: 1;
+    }
+
+    .column-count {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .kanban-board { grid-template-columns: 1fr; }
+    }

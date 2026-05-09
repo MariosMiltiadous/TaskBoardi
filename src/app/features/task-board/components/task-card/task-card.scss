@@ -1,0 +1,39 @@
+ .task-card {
+      margin-bottom: 12px;
+      border-radius: 8px !important;
+      border-left: 4px solid transparent;
+      transition: box-shadow 0.2s;
+
+      &:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important; }
+
+      &.priority-border--high    { border-left-color: #f44336; }
+      &.priority-border--medium  { border-left-color: #ff9800; }
+      &.priority-border--low     { border-left-color: #4caf50; }
+    }
+
+    mat-card-header { align-items: flex-start; padding-bottom: 4px; }
+
+    .description {
+      color: #5e6c84;
+      font-size: 13px;
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+    .status-chip {
+      font-size: 11px;
+      &.status--todo        { background: #e3f2fd; color: #1565c0; }
+      &.status--in-progress { background: #fff3e0; color: #e65100; }
+      &.status--done        { background: #e8f5e9; color: #2e7d32; }
+    }
+
+    .priority-chip {
+      font-size: 11px;
+      &.priority--high   { background: #ffebee; color: #c62828; }
+      &.priority--medium { background: #fff8e1; color: #f57f17; }
+      &.priority--low    { background: #f1f8e9; color: #33691e; }
+    }
+
+    .spacer { flex: 1; }

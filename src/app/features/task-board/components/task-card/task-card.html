@@ -1,0 +1,35 @@
+<mat-card class="task-card" [class]="'priority-border--' + task.priority">
+      <mat-card-header>
+        <mat-card-title>{{ task.title }}</mat-card-title>
+        <span class="spacer"></span>
+        <mat-chip class="status-chip" [class]="'status--' + task.status">
+          <mat-icon matChipAvatar>{{ statusIcon }}</mat-icon>
+          {{ statusLabel }}
+        </mat-chip>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="description">{{ task.description }}</p>
+        <div class="meta">
+          <mat-chip class="priority-chip" [class]="'priority--' + task.priority">
+            <mat-icon matChipAvatar>flag</mat-icon>
+            {{ task.priority }}
+          </mat-chip>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        @if (task.status !== 'done') {
+          <button mat-button color="primary"
+            matTooltip="Mark as done"
+            (click)="complete.emit(task.id)">
+            <mat-icon>check</mat-icon> Complete
+          </button>
+        }
+        <button mat-icon-button color="warn"
+          matTooltip="Delete task"
+          (click)="delete.emit(task.id)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
