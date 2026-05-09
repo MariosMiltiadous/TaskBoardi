@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../../../shared/models/task.model';
 import { TaskCard } from '../task-card/task-card';
 import { MatIcon } from '@angular/material/icon';
@@ -8,6 +8,7 @@ import { MatIcon } from '@angular/material/icon';
   imports: [TaskCard, MatIcon],
   templateUrl: './task-list.html',
   styleUrl: './task-list.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskList {
   @Input({ required: true }) tasks: Task[] = [];

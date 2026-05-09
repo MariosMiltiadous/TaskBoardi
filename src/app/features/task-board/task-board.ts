@@ -4,8 +4,6 @@ import { Task, TaskStatus } from '../../shared/models/task.model';
 import { FilterBar } from './components/filter-bar/filter-bar';
 import { TaskList } from './components/task-list/task-list';
 import { MatCard } from '@angular/material/card';
-import { MatBadge } from '@angular/material/badge';
-import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
 type FilterOption = TaskStatus | 'all';
@@ -52,13 +50,13 @@ export class TaskBoard implements OnInit {
   }
 
   onComplete(taskId: string): void {
-    this.taskService.completeTask(taskId);
+    this.taskService.complete(taskId);
     this.allTasks = this.taskService.getAll();
     this.onFilterChange(this.currentFilter);
   }
 
   onDelete(taskId: string): void {
-    this.taskService.deleteTask(taskId);
+    this.taskService.delete(taskId);
     this.allTasks = this.taskService.getAll();
     this.onFilterChange(this.currentFilter);
   }

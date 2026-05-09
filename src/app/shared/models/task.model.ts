@@ -14,3 +14,6 @@ export interface Task {
 
 // This is key — you'll use this for immutable updates later
 export type TaskUpdate = Partial<Omit<Task, 'id' | 'createdAt'>>;
+
+// NEW — what the dialog form submits. No id, no dates — service owns those.
+export type CreateTaskDto = Pick<Task, 'title' | 'description' | 'priority'>;
