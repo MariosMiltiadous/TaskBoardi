@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskForm } from './task-form';
+import { TaskFormDialog } from './task-form-dialog';
 
 describe('TaskForm', () => {
-  let component: TaskForm;
-  let fixture: ComponentFixture<TaskForm>;
+  let component: TaskFormDialog;
+  let fixture: ComponentFixture<TaskFormDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskForm],
+      imports: [TaskFormDialog],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TaskForm);
+    fixture = TestBed.createComponent(TaskFormDialog);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

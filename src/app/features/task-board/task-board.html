@@ -1,31 +1,39 @@
- <div class="board-header">
-      <h1 class="board-title">
-        <mat-icon>developer_board</mat-icon>
-        Live Task Board
-      </h1>
-      <app-filter-bar (filterChange)="onFilterChange($event)" />
-    </div>
+<div class="board-header">
+  <div class="board-title-row">
+    <h1 class="board-title">
+      <mat-icon>developer_board</mat-icon>
+      Live Task Board
+    </h1>
+    <button mat-flat-button color="primary" (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon>
+      New task
+    </button>
+  </div>
+  <app-filter-bar [current]="(filter$ | async)!" (filterChange)="onFilterChange($event)" />
+</div>
 
-    <div class="kanban-board">
-      @for (col of columns; track col.status) {
-        <div class="kanban-column">
-          <mat-card class="column-card">
-            <div class="column-header" [style.border-top-color]="col.color">
-              <mat-icon [style.color]="col.color">{{ col.icon }}</mat-icon>
-              <span class="column-title">{{ col.label }}</span>
-              <span class="column-count"
-                [style.background]="col.color + '22'"
-                [style.color]="col.color">
-                {{ getTasksForColumn(col.status).length }}
-              </span>
-            </div>
-
-            <app-task-list
-              [tasks]="getTasksForColumn(col.status)"
-              (complete)="onComplete($event)"
-              (delete)="onDelete($event)"
-            />
-          </mat-card>
+<div class="kanban-board">
+  @for (col of columns; track col.status) {
+    @let colTasks = (getColumnTasks$(col.status) | async) ?? [];
+    <div class="kanban-column">
+      <mat-card class="column-card">
+        <div class="column-header" [style.border-top-color]="col.color">
+          <mat-icon [style.color]="col.color">{{ col.icon }}</mat-icon>
+          <span class="column-title">{{ col.label }}</span>
+          <span
+            class="column-count"
+            [style.background]="col.color + '22'"
+            [style.color]="col.color"
+          >
+            {{ colTasks.length }}
+          </span>
         </div>
-      }
+        <app-task-list
+          [tasks]="colTasks"
+          (complete)="onComplete($event)"
+          (delete)="onDelete($event)"
+        />
+      </mat-card>
     </div>
+  }
+</div>

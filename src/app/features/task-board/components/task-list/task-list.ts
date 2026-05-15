@@ -11,7 +11,7 @@ import { MatIcon } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskList {
-  @Input({ required: true }) tasks: Task[] = [];
+  @Input({ required: true }) tasks!: Task[];
   @Output() complete = new EventEmitter<string>();
   @Output() delete = new EventEmitter<string>();
 }

@@ -1,5 +1,6 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
-import { CreateTaskDto, Task, TaskUpdate } from '../../../shared/models/task.model';
+import { CreateTaskDto, Task } from '../../../shared/models/task.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 // InjectionToken for initial seed data — swappable in tests without touching the service
 export const INITIAL_TASKS = new InjectionToken<Task[]>('INITIAL_TASKS', {
@@ -44,36 +45,38 @@ const MOCK_TASKS: Task[] = [
   providedIn: 'root',
 })
 export class TaskService {
-  private tasks: Task[] = [...inject(INITIAL_TASKS)];
+  // BehaviorSubject — holds current value, emits to new subscribers immediately
+  // Private: only this service can push new values
+  private readonly _tasks$ = new BehaviorSubject<Task[]>([...inject(INITIAL_TASKS)]);
 
-  getAll(): Task[] {
-    return this.tasks;
-  }
+  // Public: everyone outside gets a read-only Observable — they can listen but not push
+  readonly tasks$: Observable<Task[]> = this._tasks$.asObservable();
 
-  add(dto: CreateTaskDto): Task {
+  add(dto: CreateTaskDto): void {
     const newTask: Task = {
       ...dto,
-      id: crypto.randomUUID(), // browser-native UUID — no library needed
-      status: 'todo', // service decides default status, not the caller
-      assigneeId: 'user-1', // hardcoded for now — Phase 4 AuthService replaces this
+      id: crypto.randomUUID(),
+      status: 'todo',
+      assigneeId: 'user-1',
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    this.tasks = [...this.tasks, newTask]; // immutable — new array reference
-    return newTask;
-  }
-
-  update(id: string, changes: TaskUpdate): void {
-    this.tasks = this.tasks.map((t) =>
-      t.id === id ? { ...t, ...changes, updatedAt: new Date() } : t,
-    );
+    this.push([...this._tasks$.getValue(), newTask]);
   }
 
   complete(id: string): void {
-    this.update(id, { status: 'done' });
+    this.push(
+      this._tasks$.getValue().map((t) =>
+        t.id === id ? { ...t, status: 'done' as const, updatedAt: new Date() } : t,
+      ),
+    );
   }
 
   delete(id: string): void {
-    this.tasks = this.tasks.filter((t) => t.id !== id);
+    this.push(this._tasks$.getValue().filter((t) => t.id !== id));
+  }
+
+  private push(tasks: Task[]): void {
+    this._tasks$.next(tasks);
   }
 }

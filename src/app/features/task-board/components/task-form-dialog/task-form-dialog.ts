@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-stats',
+  selector: 'app-task-form-dialog',
   imports: [],
-  templateUrl: './stats.html',
-  styleUrl: './stats.scss',
+  templateUrl: './task-form-dialog.html',
+  styleUrl: './task-form-dialog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Stats {}
+export class TaskFormDialog {}

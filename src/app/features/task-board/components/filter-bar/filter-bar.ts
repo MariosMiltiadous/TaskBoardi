@@ -1,15 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { TaskStatus } from '../../../../shared/models/task.model';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { FilterOption } from '../../services/filter-service';
 
-type FilterOption = TaskStatus | 'all';
-
-const FILTER_ICONS: Record<FilterOption, string> = {
-  all: 'dashboard',
-  todo: 'radio_button_unchecked',
-  'in-progress': 'pending',
-  done: 'check_circle',
+const FILTER_META: Record<FilterOption, { label: string; icon: string }> = {
+  all: { label: 'All', icon: 'dashboard' },
+  todo: { label: 'To Do', icon: 'radio_button_unchecked' },
+  'in-progress': { label: 'In Progress', icon: 'pending' },
+  done: { label: 'Done', icon: 'check_circle' },
 };
 
 @Component({
@@ -20,21 +18,9 @@ const FILTER_ICONS: Record<FilterOption, string> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterBar {
+  @Input({ required: true }) current!: FilterOption;
   @Output() filterChange = new EventEmitter<FilterOption>();
 
   readonly options: FilterOption[] = ['all', 'todo', 'in-progress', 'done'];
-  readonly icons = FILTER_ICONS;
-  readonly labels: Record<FilterOption, string> = {
-    all: 'All',
-    todo: 'To Do',
-    'in-progress': 'In Progress',
-    done: 'Done',
-  };
-
-  current: FilterOption = 'all';
-
-  select(option: FilterOption): void {
-    this.current = option;
-    this.filterChange.emit(option);
-  }
+  readonly meta = FILTER_META;
 }
