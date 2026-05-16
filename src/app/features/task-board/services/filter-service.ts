@@ -8,6 +8,7 @@ export type FilterOption = 'all' | TaskStatus;
   providedIn: 'root',
 })
 export class FilterService {
+  //  private readonly _filter$ = signal('all');
   private readonly _filter$ = new BehaviorSubject<FilterOption>('all');
   readonly filter$ = this._filter$.asObservable();
 

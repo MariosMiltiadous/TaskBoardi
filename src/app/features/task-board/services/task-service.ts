@@ -39,6 +39,26 @@ const MOCK_TASKS: Task[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+  {
+    id: '4',
+    title: 'Integrate AI',
+    description: 'Document local setup for AIa',
+    status: 'done',
+    priority: 'low',
+    assigneeId: 'user-2',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '5',
+    title: 'Implement Signal Store',
+    description: 'Implement Signal Store and service',
+    status: 'todo',
+    priority: 'high',
+    assigneeId: 'user-2',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 @Injectable({
@@ -66,9 +86,9 @@ export class TaskService {
 
   complete(id: string): void {
     this.push(
-      this._tasks$.getValue().map((t) =>
-        t.id === id ? { ...t, status: 'done' as const, updatedAt: new Date() } : t,
-      ),
+      this._tasks$
+        .getValue()
+        .map((t) => (t.id === id ? { ...t, status: 'done' as const, updatedAt: new Date() } : t)),
     );
   }
 

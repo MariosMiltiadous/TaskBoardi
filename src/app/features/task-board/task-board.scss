@@ -1,18 +1,22 @@
-.board-header { margin-bottom: 24px; }
+:host {
+  display: block;
+}
+
+.board-header { margin-bottom: 20px; }
 
 .board-title-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .board-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: #172b4d;
   margin: 0;
 
@@ -27,32 +31,34 @@
 }
 
 .column-card {
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   padding: 0 !important;
-  background: #ffffff !important;
+  overflow: hidden;
+  border: 1px solid #dfe1e6 !important;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.08) !important;
 }
 
 .column-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 16px 10px;
+  padding: 12px 14px 10px;
   border-top: 3px solid transparent;
-  border-radius: 10px 10px 0 0;
+  background: #f4f5f7;
 }
 
 .column-title {
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #172b4d;
+  letter-spacing: 0.06em;
+  color: #5e6c84;
   flex: 1;
 }
 
 .column-count {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   padding: 2px 8px;
   border-radius: 20px;
 }

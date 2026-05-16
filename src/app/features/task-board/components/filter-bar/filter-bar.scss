@@ -1,1 +1,7 @@
-  .filter-bar { display: flex; gap: 8px; padding: 0 0 16px; }
+.filter-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+}
